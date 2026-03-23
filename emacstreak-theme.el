@@ -25,8 +25,13 @@
 
 ;;; Code:
 
-(defcustom emacstreak-theme 'default
-  "Theme symbol."
+(defcustom emacstreak-theme (or (let ((theme-string (getenv "EMACSTREAK_THEME")))
+                                  (and theme-string
+                                       (intern theme-string)))
+                                'default)
+  "Theme name symbol.
+Value of EMACSTREAK_THEME environment variable is used by default.
+If it is not defined, fallback to 'default theme."
   :type '(choice
           (const default)
           (const dark)
