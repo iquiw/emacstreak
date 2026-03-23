@@ -9,8 +9,8 @@ This is a feature-less port of [DenverCoder1/github-readme-streak-stats](https:/
 
 - SVG card of the following stats.
   - Total contributions
-  - Current streak.
-  - Longest streak.
+  - Current streak
+  - Longest streak
 - Themes as in `github-readme-streak-stats`.
 - Written in Emacs Lisp.
 
@@ -46,6 +46,7 @@ variable `emacstreak-github-token`.
 
 To configure theme, specify theme name symbol to `emacstreak-theme`
 variable.
+Refer to [github-readme-streak-stats/docs/themes.md](https://github.com/DenverCoder1/github-readme-streak-stats/blob/main/docs/themes.md) for available themes.
 
 ```emacs-lisp
 (setopt emacstreak-theme 'nord)
