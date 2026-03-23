@@ -92,7 +92,7 @@ Value of GITHUB_TOKEN environment variable is used by default.")
   "Post QUERY to GitHub GraphQL API for USER's contribution YEAR.
 Return the returned JSON as is if success.  Raise error otherwise."
   (unless emacstreak-github-token
-    (user-error "GITHUB_TOKEN is not defined"))
+    (user-error "GitHub token is required. Specify GitHub token in `emacstreak-github-token' variable"))
   (let* ((payload (json-serialize `((query . ,query)
                                     (variables . ((user . ,user)
                                                   (from . ,(format "%s-01-01T00:00:00Z" year))

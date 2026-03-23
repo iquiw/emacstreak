@@ -37,7 +37,7 @@ Add the directory to `load-path` and require `emacstreak`.
 
 ### Configuration
 
-Define GitHub token in the environment variable `GITHUB_TOKEN` or Emacs
+Specify GitHub token in the environment variable `GITHUB_TOKEN` or Emacs
 variable `emacstreak-github-token`.
 
 ```emacs-lisp
