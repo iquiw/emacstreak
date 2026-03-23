@@ -407,7 +407,8 @@ This does not store the last queried streak stats."
   "Save SVG of GitHub streak stats of USER to OUTPUT-FILE.
 If USE-CACHE is non-nil, the last queried streak stats is used."
   (interactive (list
-                (or current-prefix-arg (read-string "User: "))
+                (or (and current-prefix-arg emacstreak--last-streak-stats)
+                    (read-string "User: "))
                 (read-file-name "Output File: ")
                 current-prefix-arg))
   (unless (and use-cache emacstreak--last-streak-stats)
@@ -424,7 +425,8 @@ If USE-CACHE is non-nil, the last queried streak stats is used."
 If USE-CACHE is non-nil, the last queried streak stats is used.
 If you want to save SVG with animation, use `emacstreak-save-svg' instead."
   (interactive (list
-                (or current-prefix-arg (read-string "User: "))
+                (or (and current-prefix-arg emacstreak--last-streak-stats)
+                    (read-string "User: "))
                 current-prefix-arg))
   (unless (and use-cache emacstreak--last-streak-stats)
     (let ((today (format-time-string "%Y-%m-%d" (current-time))))
