@@ -44,8 +44,8 @@ variable `emacstreak-github-token`.
 (setopt emacstreak-github-token "github_pat_...")
 ```
 
-To configure theme, specify theme name symbol to `emacstreak-theme`
-variable.
+To configure theme, specify theme name in the environment variable
+`EMACSTREAK_THEME` or its symbol to `emacstreak-theme` variable.
 Refer to [github-readme-streak-stats/docs/themes.md](https://github.com/DenverCoder1/github-readme-streak-stats/blob/main/docs/themes.md) for available themes.
 
 ```emacs-lisp
@@ -61,6 +61,7 @@ without animation in the popup buffer.
 
 With the prefix-argument, it uses the last queried stats instead of
 querying GitHub GraphQL API.
+It is useful when trying different theme as the query usually takes some time.
 
 ### Interactive save
 
@@ -69,6 +70,7 @@ the specified file.
 
 With the prefix-argument, it uses the last queried stats instead of
 querying GitHub GraphQL API.
+It is useful when trying different theme as the query usually takes some time.
 
 ### Batch save
 
@@ -77,4 +79,28 @@ command outputs SVG card of `<user>` into `<output svg>`.
 
 ```console
 $ emacs --batch -L . -l emacstreak.el --eval '(emacstreak-save-svg "<user>" "<output svg>")'
+```
+
+### GitHub Action
+
+By GitHub Action, SVG card of `<user>` with `<theme>` can be generated and
+saved to `<output svg>` like follows.
+
+```yaml
+      - uses: actions/checkout@v6
+        with:
+          repository: iquiw/emacstreak
+          path: emacstreak
+
+      - name: Setup Emacs
+        uses: purcell/setup-emacs@master
+        with:
+          version: 30.2
+
+      - name: Generate streak stats card
+        run: |
+          emacs --batch -L emacstreak -l emacstreak/emacstreak.el --eval '(emacstreak-save-svg "<user>" "<output svg>")'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          EMACSTREAK_THEME: <theme>
 ```
