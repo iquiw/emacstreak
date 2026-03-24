@@ -104,3 +104,8 @@ saved to `<output svg>` like follows.
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           EMACSTREAK_THEME: <theme>
 ```
+
+## Acknowledgments
+
+SVG generation and stats calculation logic are heavily drawn from
+[DenverCoder1/github-readme-streak-stats](https://github.com/DenverCoder1/github-readme-streak-stats), though not the same.
