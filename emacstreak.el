@@ -349,9 +349,9 @@ If in the CURRENT-YEAR, year part is omitted."
        "%b %d, %Y")
      (encode-time dt))))
 
-(defun emacstreak--format-range (today from to)
+(defun emacstreak--format-range (today from to &optional is-current-streak)
   "Format range between FROM and TO.
-If TO is not after TODAY, it is shown as \"Present\"."
+If TO is not before TODAY and IS-CURRENT-STREAK is nil, it is shown as \"Present\"."
   (let* ((current-dt (parse-time-string (concat today "T00:00:00Z")))
          (current-year (decoded-time-year current-dt))
          (from-dt (parse-time-string (concat from "T00:00:00Z")))
@@ -363,7 +363,7 @@ If TO is not after TODAY, it is shown as \"Present\"."
       (concat
        (emacstreak--format-date from-dt current-year)
        " - "
-       (if (string< to today)
+       (if (or is-current-streak (string< to today))
            (emacstreak--format-date to-dt current-year)
          "Present"))))))
 
@@ -387,7 +387,8 @@ If TO is not after TODAY, it is shown as \"Present\"."
                                 (emacstreak--format-range
                                  today
                                  (plist-get stats :current-streak-start)
-                                 (plist-get stats :current-streak-end)))
+                                 (plist-get stats :current-streak-end)
+                                 t))
     (emacstreak--longest-streak g
                                 (emacstreak--format-number (plist-get stats :longest-streak-length))
                                 (emacstreak--format-range
