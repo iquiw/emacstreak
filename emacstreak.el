@@ -1,8 +1,11 @@
-;;; emacstreak.el --- GitHub streak stats in Emacs         -*- lexical-binding: t; -*-
+;;; emacstreak.el --- GitHub streak stats in Emacs Lisp        -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2026  Iku Iwasa
 
 ;; Author: Iku Iwasa <iku.iwasa@gmail.com>
+;; Package-Requires: ((emacs "28.1"))
+;; Version: 1.0
+;; URL: https://github.com/iquiw/emacstreak
 ;; Keywords: convenience
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -92,7 +95,7 @@ Value of GITHUB_TOKEN environment variable is used by default.")
   "Post QUERY to GitHub GraphQL API for USER's contribution YEAR.
 Return the returned JSON as is if success.  Raise error otherwise."
   (unless emacstreak-github-token
-    (user-error "GitHub token is required. Specify GitHub token in `emacstreak-github-token' variable"))
+    (user-error "GitHub token is required.  Specify GitHub token in `emacstreak-github-token' variable"))
   (let* ((payload (json-serialize `((query . ,query)
                                     (variables . ((user . ,user)
                                                   (from . ,(format "%s-01-01T00:00:00Z" year))
@@ -398,7 +401,7 @@ If TO is not before TODAY and IS-CURRENT-STREAK is nil, it is shown as \"Present
     svg))
 
 (defun emacstreak-generate-svg (user)
-  "Generate SVG of GitHub streak stats.
+  "Generate SVG of GitHub streak stats of USER.
 This does not store the last queried streak stats."
   (let* ((today (format-time-string "%Y-%m-%d" (current-time)))
          (stats (emacstreak--calculate-contributions user today)))
