@@ -18,3 +18,7 @@ dist/
 
 # Undo-tree save-files
 *.~undo-tree
+
+# Added automatically by `eldev init'.
+/.eldev
+/Eldev-local

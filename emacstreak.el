@@ -358,8 +358,7 @@ If TO is not before TODAY and IS-CURRENT-STREAK is nil, it is shown as \"Present
   (let* ((current-dt (parse-time-string (concat today "T00:00:00Z")))
          (current-year (decoded-time-year current-dt))
          (from-dt (parse-time-string (concat from "T00:00:00Z")))
-         (to-dt (parse-time-string (concat to "T00:00:00Z")))
-         (system-time-locale "C"))
+         (to-dt (parse-time-string (concat to "T00:00:00Z"))))
     (cond
      ((equal from to) (emacstreak--format-date from-dt current-year))
      (t
